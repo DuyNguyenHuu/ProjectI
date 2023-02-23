@@ -19,13 +19,14 @@
             echo "<br>";
         }
     }
-
-    $prev = "";
-    if (mysqli_num_rows($result) > 0) {
-    // output data of each row
-    $i = 1;
-    while($row = mysqli_fetch_assoc($result)) {
-        if ($row["MACAUHOI"] != $prev) {
+    
+    echo "<form method = 'POST'>";
+        $prev = "";
+        if (mysqli_num_rows($result) > 0) {
+        // output data of each row
+        $i = 1;
+        while($row = mysqli_fetch_assoc($result)) {
+            if ($row["MACAUHOI"] != $prev) {
                 echo "Câu hỏi ".$i.": " . $row["NOIDUNGCAUHOI"]."<br>";
 
                 $sql1 = "SELECT * FROM `cauhoi` natural join `cauhoi-dapan` natural join `dapan` WHERE `MACAUHOI` = '".$row["MACAUHOI"]."'";
@@ -33,7 +34,8 @@
                 if (mysqli_num_rows($result1) > 0){
                         $count = 65;
                     while($row1 = mysqli_fetch_assoc($result1)){
-                        echo chr($count);echo". ";echo $row1["NOIDUNGDAPAN"];echo "<br>";
+                        echo "<input type='checkbox'  name=".$row1[MADA].">";
+                        echo chr($count);echo ". ";echo "<label for=".$row1[MADA].">".$row1[NOIDUNGDAPAN]."</label><br>";
                         $count ++;
                     }
                     echo "<br>";
@@ -41,10 +43,33 @@
 
 
                 $prev = $row1["MACAUHOI"];
+                }
+                $i++;
             }
-        $i++;
+            echo "<input type='hidden' name='madethi' value='".$_GET['madethi']."'>";
+            echo "<button type = 'submit' name = 'nopbai'>Nộp bài</button>";
+        } else {
+            echo "0 results";
+        }
+    echo "</form>";
+    if (isset($_POST['nopbai'])){
+        $sql_dapan = "SELECT * FROM `dethi` 
+                    natural join `cauhoi-dethi` 
+                    natural join `cauhoi` 
+                    natural join `cauhoi-dapan` 
+                    natural join `dapan`  WHERE `MADT` = '".$_POST['madethi']."'";
+        $result_dapan = $mysqli->query($sql_dapan);
+        $sum = 0;  
+        if (mysqli_num_rows($result) > 0) {
+            while($row_dapan = mysqli_fetch_assoc($result_dapan)) {
+                if ($_POST[$row_dapan[MADA]]) {
+                    if($row_dapan["TRANGTHAI"] == 1){
+                        $sum++;
+                    }
+
+                }
+            }
+        echo $sum;echo " Điểm";
+        }
     }
-} else {
-    echo "0 results";
-}
 ?>

@@ -24,10 +24,10 @@
         <input type ="text" name = "macauhoi" value="<?php echo $cauhoi['MACAUHOI']; ?>" disabled>
 
         <label>Nội dung câu hỏi </label>
-        <input type ="text" name = "noidungcauhoi" value="<?php echo $cauhoi['NOIDUNGCAUHOI']; ?>">
+        <input type ="text" name = "noidungcauhoi" value="<?php echo $cauhoi['NOIDUNGCAUHOI']; ?>" disabled>
 
         <label>Mức độ </label>
-        <input type ="text" name = "mucdo" value="<?php echo $cauhoi['MUCDO']; ?>">
+        <input type ="text" name = "mucdo" value="<?php echo $cauhoi['MUCDO']; ?>" disabled>
 
         <label>Mã đáp án </label>
         <input type ="text" name = "mada" value="<?php echo $_GET['MADA']; ?>" disabled>
