@@ -4,6 +4,57 @@
 
     error_reporting(E_ERROR | E_PARSE);
 
+    echo "<style>
+            #info {
+                display: flex;
+                padding: 1em;
+                border: 1px solid red;
+                border-radius: 1em;
+                margin-bottom: 1em;
+            }
+
+            img {
+                max-height: 100px;
+            }
+
+            #inner-info {
+                padding: 1em !important;
+            }
+</style>";
+
+echo "<head>
+    <title>Tạo đề thi</title>
+    <link rel='stylesheet' href='Css/style.css' />
+    <script src='element.js'></script> 
+    </head>";
+
+echo "<style>
+    #menu-bar {
+        width: 100%;
+        padding: 1 em !important;
+        display: flex;
+        backgrond-color: rgb(202, 7, 7);
+    }
+
+    #menu-bar #welcome {
+        background: rgb(219, 210, 200) !important;
+    }
+    </style>";
+
+    echo "
+    <div id='menu-bar'>
+        <a href = 'index.php'><button class=\"nut-bam\"> Trang chủ </button></a><br/>
+        <a href = 'teacher.php'><button class=\"nut-bam\"> Giáo viên </button></a><br/>
+        <a href = 'Subject.php'><button class=\"nut-bam\"> Môn học </button></a><br/>
+        <a href = 'create.php'><button class=\"nut-bam\"> Tạo đề thi </button></a><br/>
+        <a href = 'add_monhoc.php'><button class=\"nut-bam\"> Thêm môn học</button></a><br/>
+        <a href = 'add_giaovien.php'><button class=\"nut-bam\"> Thêm giáo viên</button></a><br/>
+        <a href = 'add_chuong.php'><button class=\"nut-bam\"> Thêm chương</button></a><br/>
+        <a href = 'add_cauhoi.php'><button class=\"nut-bam\"> Thêm câu hỏi</button></a><br/>
+        <a ><button id='welcome' class=\"nut-bam\">Xin chào, ".$_SESSION["email"]."</button></a>
+        <a href = 'logout.php'><button id ='welcome' class=\"nut-bam\"> Đăng xuất </button></a><br/>
+    </div>";
+
     $sql_adddethi = "INSERT INTO dethi (MADT, DATE, THOIGIAN, MAMH, MAGV)
     VALUES ('".$_POST["madethi"]."', '".$_POST["date"]."', '".$_POST["time"]."', '".$_POST["subjects"]."', '".$_POST["teachers"]."')";
     $mysqli -> query($sql_adddethi);
